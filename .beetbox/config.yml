@@ -5,88 +5,18 @@ vagrant_box: beet/dev
 
 # Beetbox settings.
 beet_project: drupal
-beet_domain: "beetbox.local"
-beet_root: "{{ beet_base }}/projects/{{ beet_project }}"
-beet_mysql_database: "beetbox_{{ beet_project }}"
-beet_site_name: "Beetbox"
+beet_domain: "agov.local"
+beet_root: "{{ beet_base }}/projects/agov"
+beet_site_name: "Beetbox aGov"
 
 # Drupal settings.
-drupal_create_makefile: yes
 drupal_build_makefile: yes
+drupal_makefile_path: "{{ beet_base }}/agov.make.yml"
+drupal_install_profile: agov
 drupal_install_site: yes
 drupal_account_name: admin
 drupal_account_pass: admin
-drush_create_alias: yes
 php_memory_limit: "284M"
 
 # Beetbox debug.
 beet_debug: yes
-
-#
-# Examples.
-#
-
-# Backdrop.
-#beet_project: backdrop
-#backdrop_checkout: yes
-#backdrop_version: "1.2.2"
-#backdrop_install_site: yes
-#backdrop_account_name: admin
-#backdrop_account_pass: admin
-
-# CakePHP.
-#beet_project: cakephp
-#cake_create_project: yes
-#beet_mysql_database: "my_app"
-#beet_mysql_user: "my_app"
-#beet_mysql_password: "secret"
-
-# Drupal composer.
-#beet_root: "{{ beet_base }}/projects/{{ beet_project }}-composer"
-#beet_web: "{{ beet_root }}/web"
-#drupal_build_makefile: no
-#drupal_build_composer: yes
-#drupal_account_name: admin
-#drupal_account_pass: admin
-
-# Kohana.
-#beet_project: kohana
-#kohana_checkout: yes
-#kohana_version: "v3.3.4"
-#kohana_configure: yes
-#kohana_remove_install: yes
-
-# Modx.
-#beet_project: modx
-#modx_checkout: yes
-#modx_version: "2.x"
-#modx_install_site: yes
-#modx_account_name: admin
-#modx_account_pass: admin
-
-# Silverstripe.
-#beet_project: silverstripe
-#ss_create_project: yes
-#ss_install_site: yes
-#ss_account_name: admin
-#ss_account_pass: admin
-
-# Slim.
-#beet_project: slim
-#slim_create_new: yes
-#slim_add_example: yes
-#slim_add_htaccess: yes
-
-# Symfony
-#beet_project: symfony
-#beet_web: "{{ beet_root }}/{{ symfony_project_name }}/web"
-#symfony_project_create: yes
-#symfony_project_name: beetbox
-
-# WordPress.
-#beet_project: wordpress
-#wp_download_core: yes
-#wp_install_site: yes
-#wp_account_name: admin
-#wp_account_pass: admin
-#wp_account_email: "admin@beetbox.local"
