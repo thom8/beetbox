@@ -1,0 +1,8 @@
+---
+api: 2
+core: "8.x"
+
+projects:
+  thunder:
+      type: "core"
+      version: "8.x-1.0-beta4"
