@@ -1,0 +1,8 @@
+---
+api: 2
+core: "8.x"
+
+projects:
+  lightning:
+      type: "core"
+      version: "8.x-1.x-dev"
