@@ -1,7 +1,7 @@
 ---
 # Vagrant config.
 vagrant_ip: 192.168.88.88
-vagrant_box: beet/dev
+#vagrant_box: beet/dev
 
 # Beetbox settings.
 beet_project: drupal
@@ -20,73 +20,15 @@ drush_create_alias: yes
 php_memory_limit: "284M"
 
 # Beetbox debug.
-beet_debug: yes
+beet_debug: no
 
-#
-# Examples.
-#
 
-# Backdrop.
-#beet_project: backdrop
-#backdrop_checkout: yes
-#backdrop_version: "1.2.2"
-#backdrop_install_site: yes
-#backdrop_account_name: admin
-#backdrop_account_pass: admin
 
-# CakePHP.
-#beet_project: cakephp
-#cake_create_project: yes
-#beet_mysql_database: "my_app"
-#beet_mysql_user: "my_app"
-#beet_mysql_password: "secret"
 
-# Drupal composer.
-#beet_root: "{{ beet_base }}/projects/{{ beet_project }}-composer"
-#beet_web: "{{ beet_root }}/web"
-#drupal_build_makefile: no
-#drupal_build_composer: yes
-#drupal_account_name: admin
-#drupal_account_pass: admin
+#### Test PHP 5.6
 
-# Kohana.
-#beet_project: kohana
-#kohana_checkout: yes
-#kohana_version: "v3.3.4"
-#kohana_configure: yes
-#kohana_remove_install: yes
-
-# Modx.
-#beet_project: modx
-#modx_checkout: yes
-#modx_version: "2.x"
-#modx_install_site: yes
-#modx_account_name: admin
-#modx_account_pass: admin
-
-# Silverstripe.
-#beet_project: silverstripe
-#ss_create_project: yes
-#ss_install_site: yes
-#ss_account_name: admin
-#ss_account_pass: admin
-
-# Slim.
-#beet_project: slim
-#slim_create_new: yes
-#slim_add_example: yes
-#slim_add_htaccess: yes
-
-# Symfony
-#beet_project: symfony
-#beet_web: "{{ beet_root }}/{{ symfony_project_name }}/web"
-#symfony_project_create: yes
-#symfony_project_name: beetbox
-
-# WordPress.
-#beet_project: wordpress
-#wp_download_core: yes
-#wp_install_site: yes
-#wp_account_name: admin
-#wp_account_pass: admin
-#wp_account_email: "admin@beetbox.local"
+vagrant_box: beet/box
+vagrant_box_version: "~> 0.7.1"
+php_version: '5.6'
+vagrant_memory: '2048'
+php_memory_limit: 512M

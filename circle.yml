@@ -23,6 +23,7 @@ test:
     - composer security
     - phpunit
     - vendor/bin/robo provision ubuntu:16.04 beet_test
+    - docker run -i beet_test php -v
 deployment:
   dev:
     branch: master
