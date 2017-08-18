@@ -37,6 +37,3 @@
     owner: root
     group: root
     mode: 0755
-
-- name: Start MySQL service.
-  command: "service mysql start"
