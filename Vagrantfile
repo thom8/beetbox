@@ -182,46 +182,6 @@ Vagrant.configure("2") do |config|
   end
 end
 
-# Create local drush alias.
-if vconfig['drush_create_alias'] && vconfig['beet_project'] == 'drupal' && File.directory?("#{Dir.home}/.drush")
-
-  alias_file = vconfig['drush_alias_file'] || "#{Dir.home}/.drush/"+hostname+".aliases.drushrc.php"
-  alias_file = "#{project_root}/#{vconfig['drush_alias_file']}" if vconfig['drush_alias_file']
-
-  if ARGV[0] == "destroy"
-    File.delete(alias_file) if File.exist?(alias_file)
-  else
-    require 'erb'
-    class DrushAlias
-      attr_accessor :hostname, :uri, :key, :root
-      def template_binding
-        binding
-      end
-    end
-
-    template = <<ALIAS
-<?php
-
-$aliases['<%= @hostname %>'] = array(
-   'uri' => '<%= @uri %>',
-   'remote-host' => '<%= @uri %>',
-   'remote-user' => 'vagrant',
-   'ssh-options' => '-i <%= @key %> -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no',
-   'root' => '<%= @root %>',
-);
-ALIAS
-
-    alias_file = File.open(alias_file, "w+")
-    da = DrushAlias.new
-    da.hostname = vconfig['drush_alias_name'] || hostname
-    da.uri = hostname
-    da.key = "#{Dir.home}/.vagrant.d/insecure_private_key"
-    da.root = vconfig['beet_web'] ||= vconfig['beet_root'] ||= vconfig['beet_base']
-    alias_file << ERB.new(template).result(da.template_binding)
-    alias_file.close
-  end
-end
-
 # Load local Vagrantfile, if exists.
 include_vagrantfile_root = "#{beet_root}/Vagrantfile.local"
 load include_vagrantfile_root if File.exist?(include_vagrantfile_root)

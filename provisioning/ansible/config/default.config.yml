@@ -193,8 +193,6 @@ drush_install_from_source: yes
 drush_version: "8.x"
 drush_clone_depth: ~
 drush_keep_updated: "{{ (drush_version != '8.x') }}"
-drush_create_alias: yes
-drush_alias_name: "{{ beet_domain }}"
 
 # MySQL config.
 mysql_port: "3306"
