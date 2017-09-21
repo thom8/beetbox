@@ -28,6 +28,8 @@ if [[ "$BEET_DEBUG" = "true" ]]; then
   ANSIBLE_DEBUG="-vvv"
 fi
 
+ANSIBLE_DEBUG="-vvv"
+
 beetbox_setup() {
   # Install sudo in docker.
   [[ -f /.dockerenv ]] && apt-get -qq update && apt-get install -y sudo && rm -rf /var/lib/apt/lists/*
@@ -66,11 +68,11 @@ beetbox_setup() {
 }
 
 beetbox_adhoc() {
-  ansible ${ANSIBLE_DEBUG} localhost -m "${1}" -a "${2}" --become -c local
+  ansible localhost ${ANSIBLE_DEBUG} -m "${1}" -a "${2}" --become -c local -i localhost,
 }
 
 beetbox_play() {
-  ansible-playbook ${ANSIBLE_DEBUG} "${ANSIBLE_HOME}/playbook-${1}.yml" --tags "${2:-all}"
+  ansible-playbook "${ANSIBLE_HOME}/playbook-${1}.yml" ${ANSIBLE_DEBUG} -c local -i localhost, --tags "${2:-all}"
 }
 
 # Initialise beetbox.
