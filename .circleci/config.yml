@@ -1,0 +1,29 @@
+version: 2
+
+jobs:
+  build:
+    docker:
+      - image: circleci/php:7.1.8-browsers
+    working_directory: ~/beetbox
+    steps:
+      - checkout
+      - run: git submodule sync
+      - run: git submodule update --init
+      - setup_remote_docker
+#      - run: sudo apt-add-repository "deb http://archive.ubuntu.com/ubuntu trusty-backports main restricted universe"
+#      - run: sudo apt-get update -qq && sudo apt-get install shellcheck
+      - run: sudo composer self-update
+      - run: composer validate
+      - restore_cache:
+          keys:
+            - composer-v1-{{ checksum "composer.json" }}
+            - composer-v1-
+      - run: composer install -n --prefer-dist
+      - save_cache:
+          key: composer-v1-{{ checksum "composer.json" }}
+          paths:
+            - vendor
+#      - run: shellcheck provisioning/beetbox.sh
+      - run: composer security
+      - run: vendor/bin/phpunit
+      - run: docker build .

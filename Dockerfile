@@ -7,6 +7,9 @@ VOLUME ["/var/beetbox"]
 # Copy source files into the build context.
 COPY ./provisioning /beetbox/provisioning
 
+# Copy source files into the docroot.
+COPY ./ /var/beetbox
+
 # Provision Beetbox.
 RUN /beetbox/provisioning/beetbox.sh
 
