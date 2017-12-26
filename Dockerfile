@@ -1,19 +1,11 @@
-FROM ubuntu:16.04
+FROM 8thom/beetbox
 
-WORKDIR /beetbox
+ENV COMPOSER_ALLOW_SUPERUSER=1 \
+    PACKAGE=drupal/token
 
-# Copy source files into the build context.
-COPY ./provisioning /beetbox/provisioning
+RUN rm -rf /var/beetbox
+RUN composer create-project drupal-composer/drupal-project:8.x-dev /var/beetbox --stability dev --no-interaction
 
-# Provision Beetbox.
-RUN /beetbox/provisioning/beetbox.sh
+COPY install.sh /
 
-# Delete innodb log files and set permissions.
-RUN rm /var/lib/mysql/ib_logfile*
-RUN chown -R mysql:mysql /var/lib/mysql /var/run/mysqld
-
-# Allow reprovision.
-RUN rm /beetbox/installed
-
-EXPOSE 22 80 443
-CMD ["/bin/bash", "/start.sh"]
+CMD ["/bin/bash", "/install.sh"]
